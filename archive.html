@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive — NodeShield Play</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:           #09090f;
+            --surface:      #0e0e1a;
+            --violet:       #8b5cf6;
+            --violet-dim:   rgba(139, 92, 246, 0.1);
+            --violet-border:rgba(139, 92, 246, 0.22);
+            --amber:        #f59e0b;
+            --text:         #c2c2d8;
+            --text-strong:  #e8e8f0;
+            --muted:        #4a4a68;
+            --border:       #1a1a2c;
+            --white:        #f0f0f8;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAV */
+        .nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(9,9,15,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px; height: 52px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'DM Mono', monospace;
+            font-size: 12px; font-weight: 500;
+            color: var(--white); text-decoration: none;
+        }
+
+        .nav-logo span { color: var(--violet); }
+
+        .nav-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px; letter-spacing: 0.12em;
+            text-transform: uppercase; color: var(--muted);
+            text-decoration: none; transition: color 0.2s;
+        }
+
+        .nav-link:hover { color: var(--violet); }
+
+        /* HEADER */
+        .page-header {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 64px 24px 48px;
+            border-bottom: 1px solid var(--border);
+            width: 100%;
+        }
+
+        .page-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px; letter-spacing: 0.2em;
+            text-transform: uppercase; color: var(--amber);
+            margin-bottom: 16px; display: block;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 700; color: var(--white);
+            letter-spacing: -0.02em; line-height: 1.1;
+        }
+
+        /* ARCHIVE LIST */
+        .archive-list {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .archive-entry {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            align-items: baseline;
+            gap: 24px;
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+
+        .archive-entry:hover .entry-title { color: var(--violet); }
+
+        .entry-day {
+            font-family: 'DM Mono', monospace;
+            font-size: 11px; color: var(--amber);
+            letter-spacing: 0.1em;
+        }
+
+        .entry-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            color: var(--white); line-height: 1.3;
+            transition: color 0.2s;
+        }
+
+        .entry-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px; color: var(--muted);
+            white-space: nowrap;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 22px 24px;
+        }
+
+        .footer-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 10px; color: var(--muted);
+        }
+
+        .footer-text a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+        .footer-text a:hover { color: var(--violet); }
+
+        @media (max-width: 640px) {
+            .archive-entry { grid-template-columns: 80px 1fr; }
+            .entry-date { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="https://play.nodeshield.net" class="nav-logo">Node<span>Shield</span> Play</a>
+        <a href="https://nodeshield.net" class="nav-link">Network ↗</a>
+    </nav>
+
+    <div class="page-header">
+        <span class="page-label">▶ Archive</span>
+        <h1 class="page-title">All Editions</h1>
+    </div>
+
+    <div class="archive-list">
+
+        <a href="daily/2026-06-09.html" class="archive-entry">
+            <span class="entry-day">Day 001</span>
+            <span class="entry-title">E-Day Has a Date. Xbox Has a Direction.</span>
+            <span class="entry-date">9 Jun 2026</span>
+        </a>
+
+        <!-- Future entries added above this line -->
+
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-text">NodeShield Play &middot; Gaming &amp; Digital Culture</span>
+            <div style="display:flex;gap:20px;">
+                <span class="footer-text"><a href="https://cyber.nodeshield.net">Cyber ↗</a></span>
+                <span class="footer-text"><a href="https://nodeshield.net">Network ↗</a></span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
