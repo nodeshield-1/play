@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 001 — NodeShield Play</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --bg:#080810;--surface:#0c0c1a;--card:#101020;
+            --violet:#8b5cf6;--vg:rgba(139,92,246,0.15);--vb:rgba(139,92,246,0.3);
+            --amber:#fbbf24;--cyan:#22d3ee;--rose:#fb7185;--emerald:#34d399;
+            --text:#d0d0e8;--ts:#f0f0fc;--muted:#484868;--border:#1a1a2e;
+        }
+        html{font-size:16px;scroll-behavior:smooth}
+        body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif}
+        /* NAV */
+        .nav{position:sticky;top:0;z-index:100;background:rgba(8,8,16,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:center;padding:0 20px;justify-content:space-between;gap:16px}
+        .nav-left{display:flex;align-items:center;gap:16px}
+        .nav-logo{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--ts);text-decoration:none;letter-spacing:.04em}
+        .nav-logo span{color:var(--violet)}
+        .nav-pipe{color:var(--border);font-family:'DM Mono',monospace}
+        .nav-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;padding:3px 8px;background:var(--vg);border:1px solid var(--vb);color:var(--violet)}
+        .nav-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+        .nav-right{display:flex;align-items:center;gap:12px}
+        .nav-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+        .nav-link:hover{color:var(--violet)}
+        .nav-arrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-decoration:none;padding:4px 10px;border:1px solid var(--border);transition:all .2s}
+        .nav-arrow:hover{border-color:var(--vb);color:var(--violet)}
+        .nav-arrow.off{opacity:.22;pointer-events:none}
+        /* HERO */
+        .hero{position:relative;height:min(60vh,520px);overflow:hidden}
+        .hero-img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(.55)}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(8,8,16,.4) 40%,rgba(8,8,16,.92) 80%,var(--bg) 100%)}
+        .hero-content{position:absolute;bottom:0;left:0;right:0;padding:0 24px 40px;max-width:960px;margin:0 auto}
+        .hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+        .badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;font-weight:500}
+        .badge-violet{background:var(--violet);color:#fff}
+        .badge-amber{background:var(--amber);color:#000}
+        .badge-cyan{background:var(--cyan);color:#000}
+        .badge-rose{background:var(--rose);color:#fff}
+        .badge-emerald{background:var(--emerald);color:#000}
+        .badge-outline{background:transparent;border:1px solid var(--border);color:var(--muted)}
+        .hero-edition{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.1em}
+        .hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,54px);font-weight:700;color:#fff;line-height:1.1;letter-spacing:-.02em;max-width:740px;margin-bottom:12px;text-shadow:0 2px 20px rgba(0,0,0,.8)}
+        .hero-dek{font-size:16px;color:rgba(255,255,255,.65);max-width:580px;line-height:1.6;font-weight:300}
+        /* IMAGE CREDIT */
+        .img-credit{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);padding:6px 0;letter-spacing:.05em;text-align:right}
+        /* EDITION HEADER */
+        .edition-header{max-width:960px;margin:0 auto;padding:32px 24px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+        .edition-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+        .edition-rule{flex:1;height:1px;background:var(--border);min-width:40px}
+        /* STORY */
+        .story{max-width:960px;margin:0 auto;padding:48px 24px;border-bottom:1px solid var(--border)}
+        .story:last-of-type{border-bottom:none}
+        .story-image-wrap{margin-bottom:24px;position:relative;overflow:hidden}
+        .story-image-wrap img{width:100%;height:auto;display:block;aspect-ratio:16/7;object-fit:cover;filter:brightness(.88);transition:filter .3s}
+        .story-image-wrap:hover img{filter:brightness(.95)}
+        .story-header{margin-bottom:20px}
+        .story-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+        .story-read{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+        .story-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--ts);line-height:1.2;letter-spacing:-.015em;margin-bottom:8px}
+        .story-title em{font-style:italic;color:var(--violet)}
+        .story-dek{font-size:16px;color:var(--text);font-weight:300;line-height:1.65;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+        .story p{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:16px}
+        .story p strong{color:var(--ts);font-weight:600}
+        /* CALLOUT */
+        .callout{margin:24px 0;padding:20px 24px;border-left:3px solid var(--violet);background:var(--card)}
+        .callout-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--violet);margin-bottom:8px;display:block}
+        .callout p{font-size:15px;color:var(--text);line-height:1.7;margin:0}
+        /* VERDICT */
+        .verdict-box{margin:24px 0;padding:20px 24px;background:var(--card);border:1px solid var(--border);display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+        .verdict-score{font-family:'DM Mono',monospace;font-size:48px;font-weight:500;color:var(--amber);line-height:1;flex-shrink:0}
+        .verdict-score span{font-size:20px;color:var(--muted)}
+        .verdict-text{flex:1}
+        .verdict-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;display:block}
+        .verdict-text p{font-size:14px;color:var(--text);line-height:1.6;margin:0}
+        /* PATCH GRID */
+        .patch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);margin-top:8px}
+        .patch-item{background:var(--card);padding:20px}
+        .patch-game{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:6px;display:block}
+        .patch-text{font-size:14px;color:var(--text);line-height:1.6}
+        .patch-text strong{color:var(--ts);font-weight:600}
+        /* SOURCES */
+        .sources-section{margin-top:28px}
+        .sources-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px;display:block}
+        .sources-grid{display:flex;flex-wrap:wrap;gap:8px}
+        .source-card{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--card);border:1px solid var(--border);text-decoration:none;transition:border-color .2s,background .2s}
+        .source-card:hover{border-color:var(--vb);background:var(--vg)}
+        .source-site{font-family:'DM Mono',monospace;font-size:11px;color:var(--text);font-weight:500}
+        .source-arrow{font-size:11px;color:var(--violet)}
+        /* FOOTER */
+        footer{border-top:1px solid var(--border);padding:28px 24px}
+        .footer-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+        .footer-text{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+        .footer-text a{color:var(--muted);text-decoration:none;transition:color .2s}
+        .footer-text a:hover{color:var(--violet)}
+        .footer-links{display:flex;gap:20px}
+        @media(max-width:640px){
+            .hero{height:55vw;min-height:280px}
+            .hero-content{padding:0 16px 28px}
+            .story{padding:36px 16px}
+            .nav-date{display:none}
+            .verdict-box{flex-direction:column}
+        }
+        @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-left">
+        <a href="https://play.nodeshield.net" class="nav-logo">Node<span>Shield</span> Play</a>
+        <span class="nav-pipe">|</span>
+        <span class="nav-badge">Day 001</span>
+        <span class="nav-date">9 Jun 2026</span>
+    </div>
+    <div class="nav-right">
+        <a href="https://play.nodeshield.net/archive.html" class="nav-link">Archive</a>
+        <a href="https://nodeshield.net" class="nav-link">Network ↗</a>
+        <span class="nav-arrow off">← Prev</span>
+        <span class="nav-arrow off">Next →</span>
+    </div>
+</nav>
+
+<div class="hero">
+    <img class="hero-img" src="https://cdn.dlcompare.com/others_jpg/upload/news/image/en-gears-of-war-e-day-finally-co-fa7053f8-image-fa7053d2.jpg.webp" alt="Gears of War: E-Day — Marcus Fenix on Emergence Day" loading="eager">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-meta">
+            <span class="badge badge-violet">Boot Screen</span>
+            <span class="badge badge-outline">Edition 001</span>
+            <span class="hero-edition">9 June 2026</span>
+        </div>
+        <h1 class="hero-title">E-Day Has a Date. Xbox Has a Direction.</h1>
+        <p class="hero-dek">The biggest showcase week of the year arrives with release dates, exclusivity reveals, and an industry unable to stop mining its own past.</p>
+    </div>
+</div>
+
+<div class="edition-header">
+    <span class="edition-title">5 stories · ~5 min read · Gaming &amp; Digital Culture</span>
+    <div class="edition-rule"></div>
+</div>
+
+<!-- BOOT SCREEN -->
+<section class="story">
+    <div class="story-header">
+        <div class="story-meta"><span class="badge badge-violet">Boot Screen</span><span class="story-read">Lead Story</span></div>
+        <h2 class="story-title">Microsoft Ran the Room at Xbox Games Showcase 2026</h2>
+        <p class="story-dek">Two years of silence ended on June 7. The Coalition showed their hand, Playground showed their villain, and Xbox showed a translucent box for old times' sake.</p>
+    </div>
+    <div class="story-image-wrap">
+        <img src="https://www.gamespot.com/wp-content/uploads/2026/06/Xbox-main.jpg" alt="Xbox Games Showcase 2026 stage" loading="lazy">
+        <p class="img-credit">Image: GameSpot / Microsoft</p>
+    </div>
+    <p>The Xbox Games Showcase aired on June 7 under Asha Sharma — her first as Xbox head — and it was, by most measures, the most substantive Microsoft gaming event in several years.</p>
+    <p>The centrepiece was <strong>Gears of War: E-Day</strong>. Two years after the reveal, the prequel has a date: <strong>October 6, 2026</strong>. The gameplay shown during the showcase and the dedicated E-Day Direct put players on Emergence Day — the Locust Horde's first invasion of Sera, 14 years before the original game. Marcus Fenix and Dominic Santiago. The cover system intact. The chainsaw very much present. And confirmed as an <strong>Xbox console exclusive</strong> — Series X|S and PC, day-one on Game Pass. No PlayStation 5. No Switch 2. Microsoft is apparently serious about "return to Xbox."</p>
+    <p>Beyond E-Day: <strong>Halo: Campaign Evolved</strong> confirmed for July 28 — an expanded remake of the 2001 original. <strong>Fable</strong> gets a date of <strong>February 23, 2027</strong> alongside a villain-heavy new trailer. And the <strong>Xbox Series X25 Limited Edition</strong> — a translucent green console celebrating the brand's 25th anniversary — arrives in November.</p>
+    <div class="callout">
+        <span class="callout-label">Context</span>
+        <p>Microsoft's "return to Xbox" messaging around E-Day's exclusivity is a direct response to years of first-party titles landing on PlayStation. Whether it holds for future releases remains to be seen — but the signal is clear.</p>
+    </div>
+    <div class="sources-section">
+        <span class="sources-label">Sources</span>
+        <div class="sources-grid">
+            <a href="https://www.windowscentral.com/gaming/xbox/everything-announced-at-xbox-games-showcase-2026-and-gears-of-war-e-day-direct" class="source-card" target="_blank" rel="noopener"><span class="source-site">Windows Central</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.gamespot.com/articles/xbox-game-showcase-2026-all-the-biggest-announcements-so-far/" class="source-card" target="_blank" rel="noopener"><span class="source-site">GameSpot</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.dlcompare.com/gaming-news/gears-of-war-e-day-finally-comes-into-focus-at-xbox-showcase-2026-78375" class="source-card" target="_blank" rel="noopener"><span class="source-site">DLCompare</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.levelup.com/en/news/xbox-games-showcase-2026-recap-gears-of-war-e-day-stays-exclusive-fable-and-halo-release-dates-revealed-alongside-all-event-announcements/" class="source-card" target="_blank" rel="noopener"><span class="source-site">LevelUp</span><span class="source-arrow">↗</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEW QUEUE -->
+<section class="story">
+    <div class="story-header">
+        <div class="story-meta"><span class="badge badge-amber">Review Queue</span><span class="story-read">Analysis</span></div>
+        <h2 class="story-title">Summer Game Fest 2026: The Showcase Season, <em>Assessed Coldly</em></h2>
+        <p class="story-dek">Hundreds of trailers, a sold-out Dolby Theatre, and a release calendar that remains mostly empty. Here's what the week actually delivered.</p>
+    </div>
+    <div class="story-image-wrap">
+        <img src="https://cdn.mos.cms.futurecdn.net/V89TJvzTURnFskiHwYRxaN-2000-80.jpg" alt="Destiny 2 and Marathon — Bungie's June 2026 spotlight" loading="lazy">
+        <p class="img-credit">Image: PC Gamer / Bungie</p>
+    </div>
+    <p>Between June 2 and June 8: Sony State of Play, Summer Game Fest Live at the Dolby Theatre, Wholesome Direct, Future Games Show, Xbox Games Showcase, E-Day Direct, and the PC Gaming Show. By raw announcement count, enormous. By games available to play this month — considerably less.</p>
+    <p><strong>That distinction matters.</strong> Showcase season has become an announcement-maximalist event where the gap between what's shown and what ships grows yearly. June 2026 is quiet on actual releases — the reveals paper over a near-term drought rather than punctuate a strong slate.</p>
+    <p>That said: Sony showed a <strong>God of War spin-off</strong> and new Wolverine footage. The PC Gaming Show delivered two hours of PC reveals from Day[9]. Wholesome Direct remained the year's most pleasant 90 minutes. The Xbox Showcase did the heavy lifting for the week's sense of momentum.</p>
+    <div class="verdict-box">
+        <div class="verdict-score">6<span>/10</span></div>
+        <div class="verdict-text">
+            <span class="verdict-label">Showcase Week Verdict</span>
+            <p>Strong Xbox showing. Competent Sony. Indie highlights scattered throughout. If you follow gaming closely, you watched content that matters in 2027. If you wanted something to play this weekend — SGF didn't solve that.</p>
+        </div>
+    </div>
+    <div class="sources-section">
+        <span class="sources-label">Sources</span>
+        <div class="sources-grid">
+            <a href="https://www.pcgamer.com/games/pc-game-release-dates-june-2026/" class="source-card" target="_blank" rel="noopener"><span class="source-site">PC Gamer</span><span class="source-arrow">↗</span></a>
+            <a href="https://techraptor.net/gaming/news/everything-announced-at-pc-gaming-show-2026" class="source-card" target="_blank" rel="noopener"><span class="source-site">TechRaptor</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.pcgamer.com/gaming-industry/summer-game-fest-no-shows-the-big-games-that-were-absent-from-2026s-showcases/" class="source-card" target="_blank" rel="noopener"><span class="source-site">PC Gamer — No-Shows</span><span class="source-arrow">↗</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- INDUSTRY INTEL -->
+<section class="story">
+    <div class="story-header">
+        <div class="story-meta"><span class="badge badge-cyan">Industry Intel</span><span class="story-read">Background</span></div>
+        <h2 class="story-title">Larian Was the Week's Biggest No-Show. <em>That's Probably the Right Call.</em></h2>
+        <p class="story-dek">Divinity stayed home. The AI controversy lingers. And CD Projekt Red quietly did more for its reputation with one announcement than Larian managed in six months of damage control.</p>
+    </div>
+    <div class="story-image-wrap">
+        <img src="https://static.gosugamers.net/4b/9b/a7/930741beeb349a724bae476ddce7afefe6a92059ea70d826e6b4a25f14.webp" alt="Screenshot from Divinity reveal — Larian Studios" loading="lazy">
+        <p class="img-credit">Image: GosuGamers / Larian Studios</p>
+    </div>
+    <p>Larian Studios brought nothing to Summer Game Fest 2026. No Divinity footage. No teaser. No post from Swen Vincke. Conspicuous enough that several outlets listed the studio among the week's most notable absences.</p>
+    <p>The context: in December 2025, Vincke told Bloomberg that Larian was using generative AI tools during Divinity's development — for concept art exploration and placeholder text. The backlash was immediate. A Reddit AMA in January 2026 went further: <strong>no generative AI art will appear in Divinity</strong>, AI will not produce final assets, the writing department confirmed the same. Seventy-two artists, 23 concept artists, all human. Still hiring.</p>
+    <p>Divinity is three to four years out. Showing it at SGF would have been performative. But the AI episode has left the studio cautious about its public posture — a posture that was previously one of its greatest commercial strengths.</p>
+    <p>The contrast with <strong>CD Projekt Red</strong> is sharp. The studio announced a surprise Witcher 3 expansion — <strong><em>Songs of the Past</em></strong>, co-developed with Fool's Theory — to nothing but goodwill. No controversy. Details in late summer 2026. This is what effortless credibility looks like.</p>
+    <div class="callout">
+        <span class="callout-label">The Broader Picture</span>
+        <p>The industry's AI debate isn't resolved — it's been temporarily managed. Vincke's line captures the tension: "If everybody uses AI, that's the floor, not the ceiling." Whether that framing satisfies a fanbase still watching closely remains open.</p>
+    </div>
+    <div class="sources-section">
+        <span class="sources-label">Sources</span>
+        <div class="sources-grid">
+            <a href="https://www.thegamer.com/larian-backtracks-gen-ai-divinity/" class="source-card" target="_blank" rel="noopener"><span class="source-site">The Gamer</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.gosugamers.net/entertainment/news/77821-larian-rules-out-usage-of-generative-ai-art-for-divinity-and-future-games-following-controversy" class="source-card" target="_blank" rel="noopener"><span class="source-site">GosuGamers</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.goonhammer.com/games-industry-news-roundup-june-2nd-2026" class="source-card" target="_blank" rel="noopener"><span class="source-site">Goonhammer</span><span class="source-arrow">↗</span></a>
+        </div>
+    </div>
+</section>
+
+<!-- CULTURE BYTE -->
+<section class="story">
+    <div class="story-header">
+        <div class="story-meta"><span class="badge badge-rose">Culture Byte</span><span class="story-read">Opinion</span></div>
+        <h2 class="story-title">Gaming Has a <em>Nostalgia Complex,</em> and It's Getting Worse</h2>
+        <p class="story-dek">The Xbox Series X25 evokes 2001. Halo: Campaign Evolved is a remake of a 2001 game. The Witcher 3 is getting new content in 2026. Spot the pattern.</p>
+    </div>
+    <p>The <strong>Xbox Series X25</strong> is a translucent green console designed to evoke the original Xbox. <strong>Halo: Campaign Evolved</strong> is a remake of a game from that same year. The Witcher 3 is getting new story content. Dead by Daylight is adding Jason Voorhees — a horror IP from 1980. Retro gaming headsets are among the fastest-growing segments in the category right now.</p>
+    <p>Gaming in 2026 is comprehensively obsessed with its own past. This showcase season made that unusually visible. <strong>The industry's biggest announcements are overwhelmingly sequels, remakes, prequels, and IP revivals.</strong> Genuinely new work is confined to the Wholesome Direct corner of the calendar, where budgets are smaller and audiences more niche.</p>
+    <p>The commercial logic holds: known franchises carry lower audience acquisition costs, higher pre-order certainty, and anniversary waves give publishers legitimate marketing moments.</p>
+    <p>The counter-argument is simpler: this medium is at its best when it makes something that couldn't have existed before. This showcase season was a well-produced museum exhibit. Whether that's a crisis or a cycle is still open.</p>
+    <div class="callout">
+        <span class="callout-label">Hot Take</span>
+        <p>The most original IP shown this SGF weekend came from smaller studios that won't appear on end-of-year best-of lists. That's not an accident — it's a structural consequence of how major publishers manage risk in a market this size.</p>
+    </div>
+</section>
+
+<!-- PATCH NOTES -->
+<section class="story">
+    <div class="story-header">
+        <div class="story-meta"><span class="badge badge-emerald">Patch Notes</span><span class="story-read">Quick Hits</span></div>
+        <h2 class="story-title">This Week in Brief</h2>
+        <p class="story-dek">Jason arrives. Nintendo confirms a Direct. A card game shuts down. The usual.</p>
+    </div>
+    <div class="story-image-wrap">
+        <img src="https://www.thesixthaxis.com/wp-content/uploads/2026/05/DBD-Jason-hero500.jpg" alt="Jason Voorhees — Dead by Daylight Chapter 40" loading="lazy">
+        <p class="img-credit">Image: TheSixthAxis / Behaviour Interactive</p>
+    </div>
+    <div class="patch-grid">
+        <div class="patch-item">
+            <span class="patch-game">Dead by Daylight</span>
+            <p class="patch-text"><strong>Chapter 40: Jason</strong> drops June 16. The Slasher's signature mechanic is full invisibility with a jump-scare re-entry. Ten years in and DBD is still landing killer reveals that matter.</p>
+        </div>
+        <div class="patch-item">
+            <span class="patch-game">Nintendo</span>
+            <p class="patch-text">A <strong>Nintendo Direct</strong> confirmed for June 2026. Date TBC. Switch 2 install base is growing and first-party news has been sparse — expectations are high.</p>
+        </div>
+        <div class="patch-item">
+            <span class="patch-game">CD Projekt Red</span>
+            <p class="patch-text"><strong>Witcher 3: Songs of the Past</strong> announced at SGF, co-developed with Fool's Theory. A genuine surprise. Full details arrive late summer. The goodwill generated was immediate.</p>
+        </div>
+        <div class="patch-item">
+            <span class="patch-game">Horus Heresy: Legions</span>
+            <p class="patch-text">Servers shut down <strong>August 31</strong>. In-game store closed May 29. Another live-service game reaches its end — a reminder that nothing digital is permanent.</p>
+        </div>
+        <div class="patch-item">
+            <span class="patch-game">Bethesda</span>
+            <p class="patch-text"><strong>Fallout 76</strong> free event runs until June 15. New <strong>Thieves Guild</strong> content live in Elder Scrolls Online. Both remain, against expectation, active.</p>
+        </div>
+        <div class="patch-item">
+            <span class="patch-game">Sea of Thieves</span>
+            <p class="patch-text"><strong>Season 20</strong> lets players build custom modes — a significant structural addition for Rare's durable pirate sandbox, now in its eighth year.</p>
+        </div>
+    </div>
+    <div class="sources-section">
+        <span class="sources-label">Sources</span>
+        <div class="sources-grid">
+            <a href="https://www.thesixthaxis.com/2026/05/25/jason-is-the-next-dead-by-daylight-killer/" class="source-card" target="_blank" rel="noopener"><span class="source-site">TheSixthAxis — DBD Jason</span><span class="source-arrow">↗</span></a>
+            <a href="https://gamerant.com/gaming/" class="source-card" target="_blank" rel="noopener"><span class="source-site">Game Rant</span><span class="source-arrow">↗</span></a>
+            <a href="https://www.goonhammer.com/games-industry-news-roundup-june-2nd-2026" class="source-card" target="_blank" rel="noopener"><span class="source-site">Goonhammer Roundup</span><span class="source-arrow">↗</span></a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-text">NodeShield Play &middot; Day 001 &middot; 9 June 2026</span>
+        <div class="footer-links">
+            <span class="footer-text"><a href="https://play.nodeshield.net/archive.html">Archive</a></span>
+            <span class="footer-text"><a href="https://cyber.nodeshield.net">Cyber ↗</a></span>
+            <span class="footer-text"><a href="https://nodeshield.net">Network ↗</a></span>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
