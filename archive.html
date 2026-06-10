@@ -1,192 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive — NodeShield Play</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Grotesk:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --bg:           #09090f;
-            --surface:      #0e0e1a;
-            --violet:       #8b5cf6;
-            --violet-dim:   rgba(139, 92, 246, 0.1);
-            --violet-border:rgba(139, 92, 246, 0.22);
-            --amber:        #f59e0b;
-            --text:         #c2c2d8;
-            --text-strong:  #e8e8f0;
-            --muted:        #4a4a68;
-            --border:       #1a1a2c;
-            --white:        #f0f0f8;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* NAV */
-        .nav {
-            position: sticky; top: 0; z-index: 100;
-            background: rgba(9,9,15,0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 0 24px; height: 52px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
-
-        .nav-logo {
-            font-family: 'DM Mono', monospace;
-            font-size: 12px; font-weight: 500;
-            color: var(--white); text-decoration: none;
-        }
-
-        .nav-logo span { color: var(--violet); }
-
-        .nav-link {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px; letter-spacing: 0.12em;
-            text-transform: uppercase; color: var(--muted);
-            text-decoration: none; transition: color 0.2s;
-        }
-
-        .nav-link:hover { color: var(--violet); }
-
-        /* HEADER */
-        .page-header {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 64px 24px 48px;
-            border-bottom: 1px solid var(--border);
-            width: 100%;
-        }
-
-        .page-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px; letter-spacing: 0.2em;
-            text-transform: uppercase; color: var(--amber);
-            margin-bottom: 16px; display: block;
-        }
-
-        .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(32px, 5vw, 52px);
-            font-weight: 700; color: var(--white);
-            letter-spacing: -0.02em; line-height: 1.1;
-        }
-
-        /* ARCHIVE LIST */
-        .archive-list {
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-            flex: 1;
-        }
-
-        .archive-entry {
-            display: grid;
-            grid-template-columns: 100px 1fr auto;
-            align-items: baseline;
-            gap: 24px;
-            padding: 24px 0;
-            border-bottom: 1px solid var(--border);
-            text-decoration: none;
-            transition: background 0.15s;
-        }
-
-        .archive-entry:hover .entry-title { color: var(--violet); }
-
-        .entry-day {
-            font-family: 'DM Mono', monospace;
-            font-size: 11px; color: var(--amber);
-            letter-spacing: 0.1em;
-        }
-
-        .entry-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px; font-weight: 700;
-            color: var(--white); line-height: 1.3;
-            transition: color 0.2s;
-        }
-
-        .entry-date {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px; color: var(--muted);
-            white-space: nowrap;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 22px 24px;
-        }
-
-        .footer-inner {
-            max-width: 860px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-text {
-            font-family: 'DM Mono', monospace;
-            font-size: 10px; color: var(--muted);
-        }
-
-        .footer-text a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-        .footer-text a:hover { color: var(--violet); }
-
-        @media (max-width: 640px) {
-            .archive-entry { grid-template-columns: 80px 1fr; }
-            .entry-date { display: none; }
-        }
-    </style>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NodeShield Play &mdash; Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#07090d;--bg-raise:#0c1018;--border:#1e2a38;--green:#39ff9a;--green-dim:#1a7a4a;--cyan:#00d4ff;--purple:#b06fff;--text:#b0c8b8;--text-dim:#5a7a65;--text-hi:#ddeedd;--font-mono:'DM Mono',monospace;--font-serif:'Playfair Display',serif;--font-body:'Crimson Pro',serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background-color:var(--bg);background-image:linear-gradient(rgba(57,255,154,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,154,.03) 1px,transparent 1px);background-size:40px 40px;color:var(--text);font-family:var(--font-body);font-size:1.1rem;line-height:1.7;min-height:100vh;}
+nav{position:sticky;top:0;z-index:100;background:rgba(7,9,13,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:48px;}
+.nav-brand{font-family:var(--font-mono);font-size:.72rem;color:var(--green);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;}
+.nav-links{display:flex;gap:1.75rem;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--text-hi);}
+.nav-links a.active{color:var(--green);}
+.nav-links a.ext{color:#2a3d52;}.nav-links a.ext:hover{color:var(--text-dim);}
+.hero{max-width:860px;margin:0 auto;padding:3rem 2rem 2rem;border-bottom:1px solid var(--border);}
+.hero-label{font-family:var(--font-mono);font-size:.62rem;color:var(--cyan);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.8rem;}
+.hero-title{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--text-hi);line-height:1.12;margin-bottom:.4rem;}
+.hero-sub{font-family:var(--font-body);font-size:1rem;color:var(--text-dim);font-style:italic;}
+.wrap{max-width:860px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.month{font-family:var(--font-mono);font-size:.6rem;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase;padding-bottom:.6rem;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+.entry{display:flex;align-items:center;gap:1.25rem;padding:.9rem .75rem;border-bottom:1px solid var(--border);text-decoration:none;transition:background .15s;}
+.entry:hover{background:var(--bg-raise);}
+.entry-latest{border-left:2px solid var(--green);padding-left:1rem;}
+.e-day{font-family:var(--font-mono);font-size:.68rem;color:var(--green);letter-spacing:.06em;flex-shrink:0;width:75px;}
+.e-date{font-family:var(--font-mono);font-size:.6rem;color:var(--text-dim);letter-spacing:.08em;flex-shrink:0;width:105px;}
+.e-title{font-family:var(--font-body);font-size:1rem;color:var(--text-hi);flex:1;}
+.e-tags{display:flex;gap:.35rem;flex-shrink:0;}
+.tag{font-family:var(--font-mono);font-size:.52rem;color:var(--text-dim);letter-spacing:.08em;border:1px solid var(--border);padding:.1rem .4rem;text-transform:uppercase;}
+.e-arrow{font-family:var(--font-mono);font-size:.7rem;color:var(--text-dim);flex-shrink:0;margin-left:.5rem;transition:color .2s;}
+.entry:hover .e-arrow{color:var(--green);}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--green);border-radius:50%;margin-left:.4rem;vertical-align:middle;animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.count{display:block;font-family:var(--font-mono);font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);}
+footer{border-top:1px solid var(--border);margin:0 auto;max-width:860px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--font-mono);font-size:.58rem;color:var(--text-dim);}
+footer a{color:var(--text-dim);text-decoration:none;}footer a:hover{color:var(--green);}
+</style>
 </head>
 <body>
+<nav>
+  <a href="/index.html" class="nav-brand">NodeShield Play</a>
+  <ul class="nav-links">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/archive.html" class="active">Archive</a></li>
+    <li><a href="https://nodeshield.net" class="ext">nodeshield.net ↗</a></li>
+  </ul>
+</nav>
+<header class="hero">
+  <p class="hero-label">// All Editions</p>
+  <h1 class="hero-title">The Back Catalogue</h1>
+  <p class="hero-sub">Every edition from Day 001 onwards.</p>
+</header>
+<div class="wrap">
+  <p class="month">// June 2026</p>
 
-    <nav class="nav">
-        <a href="https://play.nodeshield.net" class="nav-logo">Node<span>Shield</span> Play</a>
-        <a href="https://nodeshield.net" class="nav-link">Network ↗</a>
-    </nav>
+  <a href="daily/2026-06-10.html" class="entry entry-latest">
+    <span class="e-day">Today<span class="live-dot"></span></span>
+    <span class="e-date">10 Jun 2026</span>
+    <span class="e-title">GTA 6 Nov 19 confirmed &middot; Summer Game Fest &middot; Nintendo Direct &middot; 33 Immortals out today</span>
+    <div class="e-tags"><span class="tag">Releases</span><span class="tag">Industry</span><span class="tag">Nintendo</span></div>
+    <span class="e-arrow">&#8599;</span>
+  </a>
 
-    <div class="page-header">
-        <span class="page-label">▶ Archive</span>
-        <h1 class="page-title">All Editions</h1>
-    </div>
-
-    <div class="archive-list">
-
-        <a href="daily/2026-06-09.html" class="archive-entry">
-            <span class="entry-day">Day 001</span>
-            <span class="entry-title">E-Day Has a Date. Xbox Has a Direction.</span>
-            <span class="entry-date">9 Jun 2026</span>
-        </a>
-
-        <!-- Future entries added above this line -->
-
-    </div>
-
-    <footer>
-        <div class="footer-inner">
-            <span class="footer-text">NodeShield Play &middot; Gaming &amp; Digital Culture</span>
-            <div style="display:flex;gap:20px;">
-                <span class="footer-text"><a href="https://cyber.nodeshield.net">Cyber ↗</a></span>
-                <span class="footer-text"><a href="https://nodeshield.net">Network ↗</a></span>
-            </div>
-        </div>
-    </footer>
-
+  <span class="count">1 edition published &mdash; updated daily</span>
+</div>
+<footer>
+  <span>&copy; 2026 NodeShield Play</span>
+  <span>play.nodeshield.net</span>
+  <span><a href="https://nodeshield.net">nodeshield.net ↗</a></span>
+</footer>
 </body>
 </html>

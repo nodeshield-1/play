@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NodeShield Play — 10 Jun 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#07090d;--bg-raise:#0c1018;--bg-card:#101520;--border:#1e2a38;--border-hi:#2a3d52;--green:#39ff9a;--green-dim:#1a7a4a;--red:#ff4444;--amber:#ffaa00;--cyan:#00d4ff;--purple:#b06fff;--text:#b0c8b8;--text-dim:#5a7a65;--text-hi:#ddeedd;--font-mono:'DM Mono',monospace;--font-serif:'Playfair Display',serif;--font-body:'Crimson Pro',serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background-color:var(--bg);background-image:linear-gradient(rgba(57,255,154,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,154,.03) 1px,transparent 1px);background-size:40px 40px;color:var(--text);font-family:var(--font-body);font-size:1.1rem;line-height:1.7;min-height:100vh;}
+nav{position:sticky;top:0;z-index:100;background:rgba(7,9,13,.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:48px;}
+.nav-brand{font-family:var(--font-mono);font-size:.72rem;color:var(--green);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;}
+.nav-links{display:flex;gap:1.75rem;list-style:none;}
+.nav-links a{font-family:var(--font-mono);font-size:.68rem;color:var(--text-dim);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--text-hi);}
+.nav-links a.ext{color:#2a3d52;}.nav-links a.ext:hover{color:var(--text-dim);}
+.hero{max-width:860px;margin:0 auto;padding:3rem 2rem 2rem;border-bottom:1px solid var(--border);}
+.day-badge{font-family:var(--font-mono);font-size:.6rem;color:var(--text-dim);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem;}
+.day-live{display:flex;align-items:center;gap:.35rem;color:var(--green);}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.hero-title{font-family:var(--font-serif);font-size:clamp(2.2rem,5vw,3.2rem);color:var(--text-hi);line-height:1.1;margin-bottom:.5rem;}
+.hero-title .cursor{color:var(--green);animation:cur 1s step-end infinite;}
+@keyframes cur{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero-sub{font-family:var(--font-mono);font-size:.65rem;color:var(--text-dim);letter-spacing:.1em;}
+.articles{max-width:860px;margin:0 auto;padding:0 2rem 4rem;}
+.story{border-bottom:1px solid var(--border);padding:2.5rem 0;}
+.story-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;}
+.story-num{color:var(--green);}
+.story-label{color:var(--text-dim);}
+.story-tag{color:var(--cyan);}
+.story-tag.purple{color:var(--purple);}
+.story-tag.amber{color:var(--amber);}
+.story-tag.red{color:var(--red);}
+.story-title{font-family:var(--font-serif);font-size:1.5rem;color:var(--text-hi);line-height:1.25;margin-bottom:1rem;}
+.story-body{font-size:1.05rem;color:var(--text);line-height:1.7;margin-bottom:1rem;}
+.story-body p+p{margin-top:.75rem;}
+.story-sources{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem;}
+.src{font-family:var(--font-mono);font-size:.58rem;color:var(--text-dim);text-decoration:none;letter-spacing:.05em;border:1px solid var(--border);padding:.18rem .5rem;transition:color .2s,border-color .2s;}
+.src:hover{color:var(--green);border-color:var(--green-dim);}
+.src::after{content:' ↗';}
+.release-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1rem 0;}
+@media(max-width:600px){.release-grid{grid-template-columns:1fr;}}
+.release-card{background:var(--bg-raise);border:1px solid var(--border);padding:.85rem 1rem;}
+.release-card .r-title{font-family:var(--font-mono);font-size:.7rem;color:var(--text-hi);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem;}
+.release-card .r-meta{font-family:var(--font-mono);font-size:.58rem;color:var(--text-dim);letter-spacing:.06em;}
+.release-card .r-tag{color:var(--cyan);}
+footer{border-top:1px solid var(--border);margin:0 auto;max-width:860px;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-family:var(--font-mono);font-size:.58rem;color:var(--text-dim);}
+footer a{color:var(--text-dim);text-decoration:none;}footer a:hover{color:var(--green);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="../index.html" class="nav-brand">NodeShield Play</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../archive.html">Archive</a></li>
+    <li><a href="https://nodeshield.net" class="ext">nodeshield.net ↗</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="day-badge">
+    <span class="day-live"><span class="live-dot"></span>Today</span>
+    <span>10 Jun 2026</span>
+  </div>
+  <h1 class="hero-title">NodeShield Play<span class="cursor">_</span></h1>
+  <p class="hero-sub">Gaming &amp; digital culture — daily intelligence</p>
+</header>
+
+<main class="articles">
+
+  <section class="story">
+    <div class="story-header">
+      <span class="story-num">01</span>
+      <span class="story-label">Lead Story</span>
+      <span class="story-tag red">GTA VI</span>
+    </div>
+    <h2 class="story-title">GTA 6 Confirmed for November 19. Pre-Orders Still Closed. Marketing Has Not Started. Rockstar Remains Silent.</h2>
+    <div class="story-body">
+      <p>Take-Two Interactive confirmed on its most recent earnings call that Grand Theft Auto VI remains on schedule for November 19, 2026, on PlayStation 5 and Xbox Series X|S. This is the date. It is not moving. Pre-orders have not yet opened — Rockstar confirmed they would go live in "a few weeks" — and the marketing machine, by the studio's own standards, has been conspicuously quiet. We have had two trailers. The second dropped over a year ago. The game reportedly costs somewhere north of $2 billion to make and is being given no promotional airtime by a studio that has apparently concluded its name is promotion enough. They are probably correct.</p>
+      <p>Summer Game Fest 2026, which wrapped last week, confirmed GTA 6 would not be attending. The show did not appear to suffer from its absence. The industry is structuring its entire autumn release schedule around a game that has shown the public less than four minutes of gameplay. November 19 cannot arrive soon enough.</p>
+    </div>
+    <div class="story-sources">
+      <a href="https://www.aol.com/articles/see-trailer-gta-6-summer-120215000.html" class="src" target="_blank" rel="noopener">AOL / For The Win</a>
+      <a href="https://www.dexerto.com/gaming/2026-video-game-release-calendar-3289874/" class="src" target="_blank" rel="noopener">Dexerto</a>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-header">
+      <span class="story-num">02</span>
+      <span class="story-label">Summer Game Fest</span>
+      <span class="story-tag purple">Announcements</span>
+    </div>
+    <h2 class="story-title">Resident Evil Veronica. Final Fantasy 7 Revelation. God of War. Persona 6. Summer Game Fest Delivered.</h2>
+    <div class="story-body">
+      <p>Summer Game Fest 2026 was, by most accounts, a strong showing. The headline reveals: Resident Evil Veronica (a full remake of the 2000 Dreamcast entry, one of the franchise's most requested), Final Fantasy 7 Revelation (the continuation of FF7 Rebirth), and a God of War announcement confirmed during PlayStation's State of Play earlier in the week. Persona 6 was officially confirmed for the first time, ending years of speculation. The two-hour show also contained a Wuthering Waves x Cyberpunk Edgerunners crossover that the internet received with disproportionate enthusiasm.</p>
+      <p>The broader read on Summer Game Fest 2026 is that the industry has quietly organised its calendar into two halves: everything before GTA 6 in November, and everything after. The September-to-October window is already crowded. February 2027 is looking uncomfortably busy.</p>
+    </div>
+    <div class="story-sources">
+      <a href="https://insider-gaming.com/summer-game-fest-2026-showcase-everything-announced/" class="src" target="_blank" rel="noopener">Insider Gaming</a>
+      <a href="https://www.gamesradar.com/news/live/summer-game-fest-live-coverage-2026-everything-announced/" class="src" target="_blank" rel="noopener">GamesRadar</a>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-header">
+      <span class="story-num">03</span>
+      <span class="story-label">Nintendo</span>
+      <span class="story-tag">Direct June 2026</span>
+    </div>
+    <h2 class="story-title">Zelda: Ocarina of Time Remake Teased. Splatoon Raiders July 23. Metaphor ReFantazio on Switch This November.</h2>
+    <div class="story-body">
+      <p>Nintendo's June 2026 Direct was headlined by the first official tease of a full remake of The Legend of Zelda: Ocarina of Time — a title that has existed in various states of rumour for the better part of a decade. No release window was given; the tease appeared to be exactly that. More immediately concrete: Splatoon Raiders was given a July 23 release date, with a dedicated Splatoon Raiders Direct confirmed for June 30. Metaphor ReFantazio — one of the best JRPGs in years — is coming to Switch on November 12. Rhythm Heaven Groove opens on July 2.</p>
+      <p>Also confirmed: Deltarune Chapter 5, which appears to be releasing imminently (the Direct noted "June 5" which has already passed, suggesting the chapter may already be available). The Kingdom Hearts original trilogy is coming to Switch 2 natively on October 8, with save transfer support from the Switch version.</p>
+    </div>
+    <div class="story-sources">
+      <a href="https://www.gamespot.com/articles/nintendo-direct-june-2026-all-the-biggest-announcements-and-games/" class="src" target="_blank" rel="noopener">GameSpot</a>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-header">
+      <span class="story-num">04</span>
+      <span class="story-label">Release Radar</span>
+      <span class="story-tag amber">Out Today &amp; This Week</span>
+    </div>
+    <h2 class="story-title">33 Immortals Out Today. Star Fox on June 25. A Packed Week Ahead.</h2>
+    <div class="story-body">
+      <p>Today's headline release is 33 Immortals (Xbox Series X|S, PC), a co-op action rogue-lite in which up to 33 players simultaneously attempt to storm the underworld. It has been in development since its reveal at The Game Awards and represents one of the more ambitious multiplayer experiments of the year. Also out today on PC: Crushed In Time. Tomorrow sees Lost Castle 2 and Frog Sqwad (Xbox Series X|S, PC), as well as Monopoly: Star Wars Heroes vs. Villains and Starseeker: Astroneer Expeditions (Early Access) across multiple platforms.</p>
+    </div>
+    <div class="release-grid">
+      <div class="release-card">
+        <div class="r-title">33 Immortals</div>
+        <div class="r-meta"><span class="r-tag">Out Today</span> · Xbox Series X|S, PC</div>
+      </div>
+      <div class="release-card">
+        <div class="r-title">Star Fox (2026)</div>
+        <div class="r-meta"><span class="r-tag">Jun 25</span> · Nintendo Switch 2</div>
+      </div>
+      <div class="release-card">
+        <div class="r-title">Splatoon Raiders</div>
+        <div class="r-meta"><span class="r-tag">Jul 23</span> · Nintendo Switch 2</div>
+      </div>
+      <div class="release-card">
+        <div class="r-title">FF7 Rebirth</div>
+        <div class="r-meta"><span class="r-tag">Jun 2026</span> · Nintendo Switch 2</div>
+      </div>
+      <div class="release-card">
+        <div class="r-title">Avatar Legends: The Fighting Game</div>
+        <div class="r-meta"><span class="r-tag">Jul 2</span> · PS5, Xbox, PC</div>
+      </div>
+      <div class="release-card">
+        <div class="r-title">Grand Theft Auto 6</div>
+        <div class="r-meta"><span class="r-tag">Nov 19</span> · PS5, Xbox Series X|S</div>
+      </div>
+    </div>
+    <div class="story-sources">
+      <a href="https://gameinformer.com/2026" class="src" target="_blank" rel="noopener">Game Informer</a>
+      <a href="https://www.videogameschronicle.com/guide/upcoming-game-release-dates-schedule/" class="src" target="_blank" rel="noopener">VGC</a>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-header">
+      <span class="story-num">05</span>
+      <span class="story-label">Signal</span>
+      <span class="story-tag">Industry</span>
+    </div>
+    <h2 class="story-title">Star Fox Is Getting a Full Reboot After 10 Years. Nintendo Has Finally Remembered Fox McCloud Exists.</h2>
+    <div class="story-body">
+      <p>Star Fox (2026) is confirmed for Nintendo Switch 2 on June 25, making it the first major entry in the franchise since Star Fox Zero in 2016 — itself a game that divided the fanbase with its dual-screen controls and was delisted from the Wii U eShop in 2023. The 2026 release is described as a full series reboot, starting fresh rather than continuing the tangled continuity of previous entries. Nintendo revealed it in May and has been unusually tight-lipped about gameplay details, which at this point in the release cycle is either a confident sign or a concerning one. Given it ships in 15 days, the former seems more likely. The Switch 2's install base is growing rapidly, and Star Fox has not had a genuine platform showcase in a decade. The timing, at least, is right.</p>
+    </div>
+    <div class="story-sources">
+      <a href="https://en.wikipedia.org/wiki/Star_Fox_(2026_video_game)" class="src" target="_blank" rel="noopener">Wikipedia</a>
+      <a href="https://www.gamesradar.com/video-game-release-dates/" class="src" target="_blank" rel="noopener">GamesRadar</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 NodeShield Play</span>
+  <span>play.nodeshield.net</span>
+  <span><a href="https://nodeshield.net">nodeshield.net ↗</a></span>
+</footer>
+</body>
+</html>
