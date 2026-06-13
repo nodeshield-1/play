@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NodeShield Play — Day 007 · 13 June 2026</title>
+<meta name="description" content="Gaming and digital culture, daily. Day 007: Xbox hits the reset button, Pokémon Go denies feeding the drones, and Summer Game Fest a week later." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#07090d; --bg-raise:#0c1018; --bg-card:#101520;
+    --border:#1e2a38; --border-hi:#2a3d52;
+    --green:#39ff9a; --red:#ff4444; --amber:#ffaa00; --cyan:#00d4ff;
+    --text:#b0c8b8; --text-dim:#5a7a65; --text-hi:#ddeedd;
+    --accent:#00d4ff; --accent-glow:rgba(0,212,255,0.18);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background-color:var(--bg);
+    background-image:linear-gradient(rgba(0,212,255,0.026) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.026) 1px,transparent 1px);
+    background-size:40px 40px;
+    color:var(--text);font-family:'Crimson Pro',Georgia,serif;font-weight:300;
+    font-size:18px;line-height:1.78;-webkit-font-smoothing:antialiased;
+  }
+  .navbar{position:sticky;top:0;z-index:100;background:rgba(7,9,13,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:48px}
+  .nav-logo{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);text-shadow:0 0 12px var(--accent-glow);text-decoration:none}
+  .nav-logo span{color:var(--text-dim)}
+  .nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none}
+  .nav-links a,.nav-links span{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a.ext{color:#2a3d52}
+  .nav-links a.ext:hover{color:var(--text-dim)}
+  .nav-links span.coming{color:#243140;cursor:not-allowed}
+  .wrap{max-width:760px;margin:0 auto;padding:0 1.5rem}
+  .masthead{padding:4rem 0 2rem;border-bottom:1px solid var(--border)}
+  .kicker{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:.6rem;margin-bottom:1.4rem}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  h1.title{font-family:'Playfair Display',serif;font-weight:900;font-size:3rem;line-height:1.05;color:var(--text-hi);letter-spacing:-.01em}
+  h1.title .cursor{color:var(--accent);animation:blink 1.1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .standfirst{font-size:1.25rem;font-style:italic;color:var(--text);margin-top:1.2rem;font-weight:300}
+  .meta-row{display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:1.6rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+  .meta-row .day{color:var(--accent)}
+  .segment{padding:3rem 0;border-bottom:1px solid var(--border)}
+  .seg-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.4rem}
+  .seg-num{font-family:'DM Mono',monospace;font-size:.85rem;color:var(--accent);opacity:.7}
+  .seg-label{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim)}
+  .tag{display:inline-block;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);border:1px solid var(--border-hi);padding:.2rem .55rem;border-radius:3px;margin-bottom:1rem}
+  h2.head{font-family:'Playfair Display',serif;font-weight:700;font-size:1.85rem;line-height:1.15;color:var(--text-hi);margin-bottom:1rem}
+  .segment p{margin-bottom:1.1rem}
+  .segment p strong{color:var(--text-hi);font-weight:600}
+  .pulled{font-family:'Playfair Display',serif;font-style:italic;font-size:1.4rem;color:var(--accent);border-left:2px solid var(--accent);padding:.4rem 0 .4rem 1.4rem;margin:1.6rem 0;line-height:1.4}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.4rem 0}
+  .card{border:1px solid var(--border);border-radius:5px;padding:1rem 1.1rem;background:var(--bg-raise)}
+  .card h4{font-family:'DM Mono',monospace;font-size:.74rem;letter-spacing:.08em;color:var(--text-hi);margin-bottom:.4rem;text-transform:uppercase}
+  .card p{font-size:.98rem;color:var(--text);margin:0;line-height:1.6}
+  .card .pill{font-family:'DM Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:.5rem}
+  .sources{margin-top:1.4rem;font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em}
+  .sources .lab{color:var(--text-dim);text-transform:uppercase;letter-spacing:.16em;margin-right:.6rem}
+  .sources a{color:#0a6f86;text-decoration:none;margin-right:1rem;border-bottom:1px dotted #0a6f86}
+  .sources a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+  .yt-cta{margin:3rem 0;padding:1.6rem;border:1px dashed var(--border-hi);border-radius:6px;display:flex;align-items:center;gap:1.2rem;background:var(--bg-raise)}
+  .yt-icon{font-size:1.6rem;color:var(--red)}
+  .yt-cta .txt{flex:1}
+  .yt-cta .txt b{color:var(--text-hi);font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.1em}
+  .yt-cta .txt span{display:block;font-size:.95rem;color:var(--text-dim)}
+  .yt-badge{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber);padding:.25rem .55rem;border-radius:3px}
+  .prevnext{display:flex;justify-content:space-between;padding:2.5rem 0;gap:1rem}
+  .prevnext a,.prevnext span{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.08em;text-decoration:none;color:var(--text-dim);transition:color .2s}
+  .prevnext a:hover{color:var(--accent)}
+  .prevnext span.off{color:#243140;cursor:not-allowed}
+  .prevnext .lab{display:block;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:#2a3d52;margin-bottom:.25rem}
+  footer{border-top:1px solid var(--border);padding:3rem 1.5rem;text-align:center}
+  .threadnote{max-width:760px;margin:0 auto 1.8rem;font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.06em;color:var(--text-dim);line-height:1.7;border:1px solid var(--border);border-radius:5px;padding:1rem 1.2rem;text-align:left}
+  .threadnote b{color:var(--accent)}
+  .footer-copy{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.12em;color:var(--text-dim);text-transform:uppercase}
+  @media(max-width:600px){h1.title{font-size:2.1rem}h2.head{font-size:1.45rem}.nav-links{gap:.9rem}.standfirst{font-size:1.1rem}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a class="nav-logo" href="/">NODESHIELD<span>&nbsp;//&nbsp;PLAY</span></a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/archive.html">Archive</a></li>
+    <li><a href="https://cyber.nodeshield.net" class="ext" target="_blank" rel="noopener">Brief &#8599;</a></li>
+    <li><a href="https://sports.nodeshield.net" class="ext" target="_blank" rel="noopener">Sport &#8599;</a></li>
+    <li><span class="coming">YouTube</span></li>
+  </ul>
+</nav>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="kicker"><span class="dot"></span> Gaming &amp; Digital Culture</div>
+    <h1 class="title">Xbox hits reset. Again.<span class="cursor">_</span></h1>
+    <p class="standfirst">Microsoft restructures its games business while the whole industry argues over whether generative AI is quietly poisoning the well it drinks from. Also: your morning Pokémon Go walk, and what it might be teaching a drone.</p>
+    <div class="meta-row">
+      <span class="day">Day 007</span>
+      <span>Saturday · 13 June 2026</span>
+      <span>play.nodeshield.net</span>
+    </div>
+  </header>
+
+  <section class="segment">
+    <div class="seg-head"><span class="seg-num">01</span><span class="seg-label">Main Quest</span></div>
+    <span class="tag">Business</span>
+    <h2 class="head">Another Xbox "reset" — and Playstack changes hands</h2>
+    <p>Xbox has announced a business <strong>"reset,"</strong> the latest in a long-running cycle of restructures that have become almost seasonal. In the same news beat, publisher <strong>Playstack</strong> — the studio behind one of recent years' biggest indie breakouts — was sold. The framing matters: when a platform holder reaches for the word "reset," it usually means the previous strategy is being quietly buried rather than corrected.</p>
+    <p>For developers downstream, "reset" is rarely the comforting word it's meant to be. It signals shifting greenlight criteria, renegotiated deals, and a fresh interpretation of what Game Pass is actually <em>for</em>. The console war, such as it is, has long since stopped being about hardware and become a fight over who controls distribution. A reset is a redrawing of those terms.</p>
+    <p class="pulled">Platforms don't reset because things are going well. They reset because the previous bet stopped paying.</p>
+    <div class="sources"><span class="lab">Sources</span>
+      <a href="https://www.gamedeveloper.com/" target="_blank" rel="noopener">Game Developer</a>
+    </div>
+  </section>
+
+  <section class="segment">
+    <div class="seg-head"><span class="seg-num">02</span><span class="seg-label">Side Quest</span></div>
+    <span class="tag">Showcase</span>
+    <h2 class="head">Summer Game Fest, one week on: what actually held up</h2>
+    <p>The confetti from the 5 June showcase has settled, so here's the honest audit. The headline reveals leaned hard on legacy: <strong>Final Fantasy VII Revelation</strong> closed the night as the final chapter of the Remake trilogy, complete with the Highwind, Cid and Vincent. <strong>Resident Evil Veronica</strong> and a <strong>Kingdom Hearts IV</strong> trailer (smuggled in via a last-minute Nintendo Direct) did the rest of the nostalgia lifting.</p>
+    <p>The genuinely interesting swings came from the margins. <strong>Until Dawn 2</strong> is being made by Liverpool's Firesprite rather than series originator Supermassive — a quietly significant handover. And the <strong>Cuphead</strong> team announced two games at once: a hand-animated successor and an 8-bit throwback. A week later, the reveals that still have people talking are the unexpected ones, not the safe sequels. That's usually the tell for which of these actually ships with a soul.</p>
+    <div class="sources"><span class="lab">Sources</span>
+      <a href="https://www.gamespot.com/articles/summer-game-fest-live-2026-all-the-biggest-announcements-and-games/" target="_blank" rel="noopener">GameSpot</a>
+      <a href="https://www.engadget.com/2192216/summer-game-fest-2026-roundup-all-the-shows-trailers-news-and-reviews/" target="_blank" rel="noopener">Engadget</a>
+    </div>
+  </section>
+
+  <section class="segment">
+    <div class="seg-head"><span class="seg-num">03</span><span class="seg-label">Patch Notes</span></div>
+    <span class="tag">Releases &amp; Updates</span>
+    <h2 class="head">What's shipping, selling, and free this week</h2>
+    <div class="grid">
+      <div class="card"><span class="pill">Sales</span><h4>Crimson Desert</h4><p>Tops 6 million sales within three months — a genuine breakout for Pearl Abyss after years of "is it real?" jokes.</p></div>
+      <div class="card"><span class="pill">Comeback</span><h4>Telltale Returns</h4><p>The studio is back. The open question is whether it has learnt anything from the burnout culture that sank it the first time.</p></div>
+      <div class="card"><span class="pill">Free to Keep</span><h4>STALKER-vibes Giveaway</h4><p>A moody PC shooter is free to claim until 19 June. Grab it before the window shuts.</p></div>
+      <div class="card"><span class="pill">Early Access</span><h4>CoD: Modern Warfare 4</h4><p>Campaign early access opens for those who can't wait to see where Captain Price's story goes next.</p></div>
+    </div>
+    <p>Quiet week for marquee launches, loud week for momentum: a Korean blockbuster overdelivering, a fallen studio resurrected, and the usual free-game churn keeping libraries fat. <strong>Diablo 4</strong>'s Season 13 also locked in its least-loved class as official — proof that "balance" remains the genre's permanent unfinished quest.</p>
+    <div class="sources"><span class="lab">Sources</span>
+      <a href="https://www.gamedeveloper.com/" target="_blank" rel="noopener">Game Developer</a>
+      <a href="https://gamerant.com/gaming/" target="_blank" rel="noopener">Game Rant</a>
+    </div>
+  </section>
+
+  <section class="segment">
+    <div class="seg-head"><span class="seg-num">04</span><span class="seg-label">Boss Fight</span></div>
+    <span class="tag">The Fight</span>
+    <h2 class="head">Is generative AI poisoning the well — and is your map data feeding a drone?</h2>
+    <p>The industry's loudest argument right now isn't about a game at all. It's whether generative AI is <strong>"poisoning the well"</strong> — degrading the craft, the labour market, and eventually the training data itself as AI-made content recirculates. It's no longer a fringe worry; it's headlining the trade-press agenda.</p>
+    <p>Into that anxiety walked a sharper story: <strong>Niantic Spatial</strong> had to publicly deny that the video scans players capture in <strong>Pokémon Go</strong> are used to train <strong>AI drone</strong> navigation. Whatever the truth of the denial, the fact the question is plausible enough to require one is the real headline. The thing you do for fun — wandering your neighbourhood catching imaginary creatures — produces exactly the geospatial data a machine would want.</p>
+    <p>Gaming spent years as the canary in the data-mine: loot boxes, telemetry, always-online. It's now the canary for AI's consent problem too. Play first, find out what you agreed to later.</p>
+    <div class="sources"><span class="lab">Sources</span>
+      <a href="https://www.gamedeveloper.com/" target="_blank" rel="noopener">Game Developer</a>
+    </div>
+  </section>
+
+  <section class="segment">
+    <div class="seg-head"><span class="seg-num">05</span><span class="seg-label">Easter Egg</span></div>
+    <span class="tag">Signal</span>
+    <h2 class="head">The longest pre-order in history continues</h2>
+    <p>Somewhere in the 2026 release calendar sits <strong>Grand Theft Auto VI</strong>, still officially "one of the biggest entertainment launches of all time" and still, per the careful hedging of every outlet tracking it, <em>"if it doesn't get yet another delay."</em> The industry has reorganised entire fiscal years around a game it has barely played.</p>
+    <p>That's the quiet theme connecting today's edition: gaming keeps betting its future on things it doesn't fully control — a reset that might not work, a sequel that might lack a soul, an AI it's not sure it trusts, a launch it can't pin down. The medium runs on faith more than it likes to admit. See you tomorrow, same channel.</p>
+    <div class="sources"><span class="lab">Sources</span>
+      <a href="https://www.gamespot.com/articles/2026-upcoming-games-release-schedule/1100-6534941/" target="_blank" rel="noopener">GameSpot</a>
+    </div>
+  </section>
+
+  <div class="yt-cta">
+    <span class="yt-icon">&#9654;</span>
+    <div class="txt"><b>NODESHIELD PLAY — THE VIDEO EDITION</b><span>Today's run-down, narrated and edited. Coming to the channel soon.</span></div>
+    <span class="yt-badge">Coming Soon</span>
+  </div>
+
+  <nav class="prevnext">
+    <a href="/daily/2026-06-12.html"><span class="lab">Previous</span>&#8592; Day 006 · 12 June</a>
+    <span class="off"><span class="lab">Next</span>Day 008 &#8594;</span>
+  </nav>
+</div>
+
+<footer>
+  <div class="threadnote">
+    <b>// NETWORK THREAD —</b> One story runs across all three NodeShield channels today: artificial intelligence as both weapon and battleground. Generative AI "poisoning the well" here on Play, hijacked coding agents over on <a href="https://cyber.nodeshield.net" style="color:var(--green);text-decoration:none">Brief</a>, and pure human drama on elimination night at <a href="https://sports.nodeshield.net" style="color:var(--amber);text-decoration:none">Sport</a>. Read across.
+  </div>
+  <span class="footer-copy">&copy; 2026 NodeShield Play &nbsp;·&nbsp; Day 007 &nbsp;·&nbsp; play.nodeshield.net</span>
+</footer>
+
+</body>
+</html>
